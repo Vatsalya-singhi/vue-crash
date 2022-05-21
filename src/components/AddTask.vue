@@ -18,7 +18,7 @@
       <input type="checkbox" v-model="reminder" name="reminder" />
     </div>
 
-    <input type="submit" value="Save Task" class="btn btn-block" />
+    <input type="submit" value="Save Task" class="btn btn-block submit-btn" />
   </form>
 </template>
 
@@ -81,5 +81,10 @@ export default {
 .form-control-check input {
   flex: 2;
   height: 20px;
+}
+.submit-btn {
+  color: #fff !important;
+  display: inline-block !important;
+  cursor: pointer !important;
 }
 </style>

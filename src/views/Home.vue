@@ -1,5 +1,5 @@
 <template>
-  <AddTask v-if="showAddTask" @add-task="addTask"></AddTask>
+  <AddTask v-show="showAddTask" @add-task="addTask"></AddTask>
   <TaskList
     :tasks="tasks"
     @delete-task="deleteTask"
@@ -43,7 +43,6 @@ export default {
       }
     },
     async toggleTask(id) {
-      console.log("toggle=>", id);
       let taskToToggle = await this.fetchTask(id);
       let updateTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
 
@@ -54,9 +53,8 @@ export default {
         },
         body: JSON.stringify(updateTask),
       });
-      let data = await res.json();
 
-      if (data.status == 200) {
+      if (res.status == 200) {
         this.tasks.some((task) => {
           if (task.id == id) {
             task.reminder = !task.reminder;
@@ -67,7 +65,7 @@ export default {
       }
     },
     async addTask(task) {
-      const res = await fetch("api/tasks", {
+      const res = await fetch(`api/tasks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,12 +77,12 @@ export default {
       this.tasks = [data, ...this.tasks];
     },
     async fetchTasks() {
-      const res = await fetch("api/tasks");
+      const res = await fetch(`api/tasks`);
       const data = await res.json();
       return data;
     },
     async fetchTask(id) {
-      const res = await fetch(`api/${id}`);
+      const res = await fetch(`api/tasks/${id}`);
       const data = await res.json();
       return data;
     },

@@ -26,7 +26,7 @@ export default {
   emits: ["toggle-add-task-btn"],
   computed: {
     homePage() {
-      if (this.$route.path == "/") return true;
+      if (this.$route.path == "/dashboard/") return true;
       return false;
     },
   },
